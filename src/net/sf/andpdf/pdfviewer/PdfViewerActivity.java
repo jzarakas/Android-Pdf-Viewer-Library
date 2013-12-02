@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.RectF;
-import android.graphics.Bitmap.Config;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -61,7 +60,7 @@ public abstract class PdfViewerActivity extends Activity {
 	private static final float STARTZOOM = 1.0f;
 	
 	private static final float MIN_ZOOM = 0.25f;
-	private static final float MAX_ZOOM = 3.0f;
+	private static final float MAX_ZOOM = 6.0f;
 	private static final float ZOOM_INCREMENT = 1.5f;
 	
 	private static final String TAG = "PDFVIEWER";
@@ -71,6 +70,8 @@ public abstract class PdfViewerActivity extends Activity {
     public static final String EXTRA_ANTIALIAS = "net.sf.andpdf.extra.ANTIALIAS";
     public static final String EXTRA_USEFONTSUBSTITUTION = "net.sf.andpdf.extra.USEFONTSUBSTITUTION";
     public static final String EXTRA_KEEPCACHES = "net.sf.andpdf.extra.KEEPCACHES";
+
+    public static final String EXTRA_START_ZOOM = "net.sf.andpdf.extra.STARTZOOM";
 	
 	public static final boolean DEFAULTSHOWIMAGES = true;
 	public static final boolean DEFAULTANTIALIAS = true;
@@ -207,7 +208,7 @@ public abstract class PdfViewerActivity extends Activity {
 	        	pdffilename = "no file selected";
 
 			mPage = STARTPAGE;
-			mZoom = STARTZOOM;
+			mZoom = getIntent().getFloatExtra(PdfViewerActivity.EXTRA_START_ZOOM, STARTZOOM);
 
 			setContent(null);
 	        
